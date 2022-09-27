@@ -1,0 +1,219 @@
+%設定頁面
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in,a4paper]{geometry}
+
+%設定中文
+\usepackage{xeCJK} 
+\setCJKmainfont{標楷體} 
+\XeTeXlinebreaklocale "zh"   
+\XeTeXlinebreakskip = 0pt plus 1pt 
+
+%浮水印
+%\usepackage{draftwatermark}
+%\SetWatermarkText{\bf NTNU MATH}
+%\SetWatermarkScale{0.7}
+
+%圖片
+\usepackage{graphicx}
+\usepackage{subfigure}
+
+%頁首頁尾
+\makeatother
+\usepackage{fancyhdr}
+
+%顏色
+\usepackage{xcolor}
+
+%表格顏色
+\usepackage{colortbl}
+
+%設定數學
+\usepackage{amsmath, amsthm, amssymb}
+\makeatletter
+
+%自定圈圈標號
+\usepackage{pstricks,pstricks-add}
+\newcommand\textc[1]{{\begin{pspicture*}
+(-0.25,-0.2)(0.25,0.3)\rput[c](0,0)
+{\large \textcircled{\footnotesize #1}}
+\end{pspicture*} }}
+
+%自訂向量符號
+\def\leftharpoonfill@{\arrowfill@\leftharpoonup\relbar\relbar}
+\def\rightharpoonfill@{\arrowfill@\relbar\relbar\rightharpoonup}
+\newcommand\rbjt{\mathpalette{\overarrow@\rightharpoonfill@}}
+\newcommand\lbjt{\mathpalette{\overarrow@\leftharpoonfill@}}
+
+%自訂定理
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{de}{Definition}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{ex}{Example}
+\newtheorem*{pf}{Proof}
+\newtheorem*{sol}{Solution}
+
+%程式碼
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  basicstyle={\small \ttfamily},
+  frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numbersep = 14pt,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+  backgroundcolor=\color{gray!10}
+}
+
+
+
+
+%作者
+\title{NTNU影像處理HW11}
+\author{廖家緯}
+\date{2020.5.27}
+
+\begin{document}
+\maketitle
+%標題、作者、日期
+\fontsize{12pt}{30pt}\selectfont
+%設定字體大小、間距
+\setlength{\baselineskip}{25pt}
+%設定行距
+
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt} %上線寬
+\renewcommand{\footrulewidth}{0pt} %下線寬
+%\renewcommand{\abstractname}{Executive Summary}
+
+
+
+
+%正文開始
+\begin{enumerate}
+\item[1.]	
+Prove $\overline{A \oplus B}
+=\overline{A} \Theta \widehat{B}$.\\
+{\bf Proof:}
+\begin{align*}
+\overline{A \oplus B}
+&=\overline{\{x|
+(\widehat{B})_x \cap A \neq \varnothing \}}
+\,\text{(by definition)}\\
+&=\{x|(\widehat{B})_x \cap A=\varnothing \}\\
+&=\{x|(\widehat{B})_x \subseteq \overline{A} \}\\
+&=\overline{A} \Theta \widehat{B}
+\,\text{(by definition)}\\ 
+\end{align*}
+
+
+\item[2.]	
+Prove $\overline{A \circ B}
+=\overline{A} \bullet \widehat{B}$.\\
+{\bf Proof:}
+\begin{align*}
+\overline{A \circ B}
+&=\overline{(A \Theta B) \oplus B}
+\,\text{(by definition)}\\ 
+&=\overline{(A \Theta B)} \Theta \widehat{B}
+\, \text{(by 1.)}\\
+&=(\overline{A} \oplus \widehat{B})
+\Theta \widehat{B}\, \text{(by property)}\\
+&=\overline{A} \bullet \widehat{B}
+\,\text{(by definition)}\\ 
+\end{align*}
+
+\newpage
+\item[3.]	
+Prove if $A \subseteq C$, then
+$({A \circ B}) \subseteq (C \circ B)$.\\
+{\bf Proof:}\\
+Let $x \in (A \circ B)$.
+By definition, $x \in (A \Theta B) \oplus B$.\\
+Then $x=p+q$
+for some $p \in (A \Theta B)$ and
+$q \in B$\\
+Note that\\
+$\because p \in (A \Theta B) \quad$
+$\therefore$ by definition,
+$p \in A$ and $B_p \subseteq A$\\
+Moreover, $\because A \subseteq C \quad$
+$\therefore p \in C$ and $B_p \subseteq C$
+$\Longrightarrow p \in (C \Theta B)$\\
+Hence $x=p+q$
+for some $p \in (C \Theta B)$ and $q \in B$\\
+$\Longrightarrow x \in (C \Theta B) \oplus B$
+\,(by definition)\\
+$\Longrightarrow x \in (C \circ B)$
+\,(by definition)\\ 
+Therefore, $({A \circ B}) \subseteq (C \circ B)$.
+\item[4.]	
+Prove if $A \subseteq C$, then
+$({A \bullet B}) \subseteq ({C \bullet B})$.
+
+\begin{tabular}{|l|}
+\hline
+{\bf Lemma.}\\
+If $A \subseteq C$, then
+$({A \oplus B}) \subseteq ({C \oplus B})$.\\
+{\bf Proof:}\\
+Let $x \in ({A \oplus B})$.
+Then $x=p+q$ for some $p \in A$ and $q \in B$\\
+$\because A \subseteq C \quad
+\therefore p \in C$ and $q \in B$
+$\quad \Longrightarrow x=p+q$
+for some $p \in C$ and $q \in B$.\\
+Hence $x \in (C \oplus B)$.
+Therefore,
+$({A \oplus B}) \subseteq ({C \oplus B})$\\
+\hline
+\end{tabular}
+
+{\bf Proof:}\\
+Let $x \in (A \bullet B)$.
+By definition, $x \in (A \oplus B) \Theta B$.\\
+Then $x \in (A \oplus B)$ and $B_x \subseteq (A \oplus B)$\\
+Moreover, $\because A \subseteq C$
+$\quad \therefore$ by Lemma,
+$x \in (C \oplus B)$ and $B_x \subseteq (C \oplus B)$\\
+$\Longrightarrow x \in (C \oplus B) \Theta B$.
+\,(by definition)\\
+$\Longrightarrow x \in (C \bullet B)$
+\,(by definition)\\
+Therefore, $({A \bullet B}) \subseteq ({C \bullet B})$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
